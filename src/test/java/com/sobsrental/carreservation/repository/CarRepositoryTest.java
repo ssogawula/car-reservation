@@ -21,7 +21,7 @@ public class CarRepositoryTest {
 	
 	@BeforeEach
 	public void init() {
-		testEntityManager.persistAndFlush(new Car("Toyota", "Bakkie"));
+		testEntityManager.persistAndFlush(new Car("Toyota", "Bakkie", "White"));
 	}
 	
 	@Test

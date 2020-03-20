@@ -4,6 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Car {
 
@@ -12,41 +19,10 @@ public class Car {
 	private Long id;
 	
 	private String carName;
-	
+	private String carType;
 	private String color;
 	
-	private String carType;
-	
-	//Added for JPA, but why?
-	public Car() {	}
-	
-	public Car(String carName, String carType) {
-		this.carName = carName;
-		this.carType = carType;
-	}
-
-	public String getCarName() {
-		return carName;
-	}
-	
-	public void setCarName(String carName) {
-		this.carName = carName;
-	}
-	
-	public String getCarType() {
-		return carType;
-	}
-	
-	
-	public void setCarType(String carType) {
-		this.carType = carType;
-	}
-	
-	public String getColor() {
-		return color;
-	}
-	
-	public void setColor(String color) {
-		this.color = color;
+	public Car(String carName, String carType, String color) {
+		this(null, carName, carType, color);
 	}
 }

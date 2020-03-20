@@ -17,6 +17,17 @@ public class CarServiceImpl implements CarService {
 	}
 	
 	@Override
+	public Car addCar(Car car) {
+		return carRepository.save(car);
+	}
+	
+	@Override
+	public Car getCarById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public Car getCarByCarName(String carName) {
 		Car car = carRepository.findByCarName(carName);
 		if (car == null) {

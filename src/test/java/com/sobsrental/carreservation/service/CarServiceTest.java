@@ -29,13 +29,14 @@ public class CarServiceTest {
 	@Test
 	public void getCarByName_ShouldReturnCarDetails() {
 		//Arrange
-		given(carRepository.findByCarName(anyString())).willReturn(new Car("Toyota", "Bakkie"));
+		given(carRepository.findByCarName(anyString())).willReturn(new Car("Toyota", "Bakkie", "White"));
 		//Query car
 		Car car = carService.getCarByCarName("Toyota");
 		
 		//Assert
 		assertEquals(car.getCarName(), "Toyota");
 		assertEquals(car.getCarType(), "Bakkie");
+		assertEquals(car.getColor(), "White");
 	}
 	
 	@Test
