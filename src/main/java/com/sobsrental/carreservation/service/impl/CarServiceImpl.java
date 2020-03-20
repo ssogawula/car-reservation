@@ -3,6 +3,7 @@ package com.sobsrental.carreservation.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.sobsrental.carreservation.domain.Car;
+import com.sobsrental.carreservation.exception.CarNotFoundCarException;
 import com.sobsrental.carreservation.repository.CarRepository;
 import com.sobsrental.carreservation.service.CarService;
 
@@ -17,7 +18,11 @@ public class CarServiceImpl implements CarService {
 	
 	@Override
 	public Car getCarByCarName(String carName) {
-		return carRepository.findByCarName(carName);
+		Car car = carRepository.findByCarName(carName);
+		if (car == null) {
+			throw new CarNotFoundCarException();
+		}
+		return car;
 	}
 
 }
