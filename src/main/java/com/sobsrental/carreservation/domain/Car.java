@@ -13,7 +13,12 @@ public class Car {
 	
 	private String carName;
 	
+	private String color;
+	
 	private String carType;
+	
+	//Added for JPA, but why?
+	public Car() {	}
 	
 	public Car(String carName, String carType) {
 		this.carName = carName;
@@ -35,5 +40,13 @@ public class Car {
 	
 	public void setCarType(String carType) {
 		this.carType = carType;
+	}
+	
+	public String getColor() {
+		return color;
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
 	}
 }
