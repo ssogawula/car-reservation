@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.sobsrental.carreservation.domain.Car;
-import com.sobsrental.carreservation.exception.CarNotFoundCarException;
+import com.sobsrental.carreservation.exception.ResourceNotFoundException;
 import com.sobsrental.carreservation.repository.CarRepository;
 import com.sobsrental.carreservation.service.impl.CarServiceImpl;
 
@@ -45,6 +45,6 @@ public class CarServiceTest {
 		given(carRepository.findByCarName(anyString())).willReturn(null);
 		
 		//Assert
-		assertThrows(CarNotFoundCarException.class, () -> carService.getCarByCarName("Golf"));
+		assertThrows(ResourceNotFoundException.class, () -> carService.getCarByCarName("Golf"));
 	}
 }

@@ -2,17 +2,19 @@ package com.sobsrental.carreservation.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sobsrental.carreservation.domain.Car;
-import com.sobsrental.carreservation.exception.CarNotFoundCarException;
+import com.sobsrental.carreservation.exception.ResourceNotFoundException;
 import com.sobsrental.carreservation.service.CarService;
 
 @RestController
@@ -37,18 +39,21 @@ public class CarController {
 		return carService.getCarByCarName(carName);
 	}
 	
-	public Car updateCar(@RequestBody Car car) {
-
-		return null;
+	@PutMapping("/{id}")
+	public ResponseEntity<Car> updateCar(@PathVariable Long id,@RequestBody Car car) {
+		Car updatedCar = carService.updateCar(id, car);
+		return new ResponseEntity<Car>(updatedCar, HttpStatus.OK);
 	}
 	
-	public void deleteCar(Long id) {
-		
+	@PutMapping
+	public ResponseEntity<Car> updateCar(@RequestBody Car car) {
+		Car updatedCar = carService.updateCar(car);
+		return new ResponseEntity<Car>(updatedCar, HttpStatus.OK);
 	}
 	
-	@ExceptionHandler
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	private void carNotFoundException(CarNotFoundCarException e) {
-		
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteCar(Long id) {
+		carService.deleteCar(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }
