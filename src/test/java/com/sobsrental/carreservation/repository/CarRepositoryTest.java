@@ -29,6 +29,8 @@ public class CarRepositoryTest {
 		Car car = carRepository.findByCarName("Toyota");
 		
 		assertEquals(car.getCarName(), "Toyota");
+		assertEquals(car.getCarType(), "Bakkie");
+		assertEquals(car.getColor(), "White");
 	}
 	
 	@Test

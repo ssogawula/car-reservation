@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -55,6 +57,18 @@ public class CarServiceTest {
 		
 		//Assert
 		assertThrows(NullPointerException.class, () -> carService.getCarById(0L));
+	}
+	
+	@Test
+	public void getCarById_ShouldReturnCarDetails() {
+		//Arrange
+		given(carRepository.findById(anyLong())).willReturn(Optional.of(new Car(1L, "Toyota", "Bakkie", "White")));
+		
+		Car existingCar = carService.getCarById(1L);
+		//Assert
+		assertEquals(existingCar.getCarName(), "Toyota");
+		assertEquals(existingCar.getCarType(), "Bakkie");
+		assertEquals(existingCar.getColor(), "White");
 	}
 	
 	@Test
