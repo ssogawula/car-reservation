@@ -65,8 +65,11 @@ public class CarServiceImpl implements CarService {
 	
 	@Override
 	public void deleteCar(Long id) {
-		Car car = getCarById(id);
-		carRepository.delete(car);
+		Car existingCar = carRepository.getOne(id);
+		if (existingCar == null) {
+			throw new ResourceNotFoundException("Car is not found.");
+		}
+		carRepository.delete(existingCar);
 	}
 
 }
