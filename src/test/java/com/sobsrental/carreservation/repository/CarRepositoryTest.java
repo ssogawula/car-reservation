@@ -2,6 +2,10 @@ package com.sobsrental.carreservation.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +30,10 @@ public class CarRepositoryTest {
 	
 	@Test
 	public void getCarByName_ShouldReturnCarDetails() {
-		Car car = carRepository.findByCarName("Toyota");
+		List<Car> cars = carRepository.findByCarName("Toyota");
 		
+		assertEquals(!cars.isEmpty(), cars.size() > 0);
+		Car car = cars.get(0);
 		assertEquals(car.getCarName(), "Toyota");
 		assertEquals(car.getCarType(), "Bakkie");
 		assertEquals(car.getColor(), "White");
@@ -35,6 +41,6 @@ public class CarRepositoryTest {
 	
 	@Test
 	public void getCarByName_ShouldThrowCarNotFoundException() {
-		assertEquals(carRepository.findByCarName("Golf"), null);
+		assertEquals(carRepository.findByCarName("Golf"), new ArrayList<Car>());
 	}
 }

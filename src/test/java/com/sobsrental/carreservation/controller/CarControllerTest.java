@@ -7,6 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +49,13 @@ public class CarControllerTest {
 	@Test
 	public void getCarByCarName_ShouldReturnCarDetails() throws Exception {
 		//Arrange 
-		given(carService.getCarByCarName(anyString())).willReturn(new Car("Toyota", "Bakkie", "White"));
+		given(carService.getCarByCarName(anyString())).willReturn(Arrays.asList(new Car("Toyota", "Bakkie", "White")));
 
 		//Assert mock
 		mockMvc.perform(get("/v1/api/cars/Toyota"))
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("carName").value("Toyota"))
-			.andExpect(jsonPath("carType").value("Bakkie"));
+			.andExpect(jsonPath("$[0].carName").value("Toyota"))
+			.andExpect(jsonPath("$[0].carType").value("Bakkie"));
 	}
 	
 	@Test

@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,10 +34,13 @@ public class CarServiceTest {
 	@Test
 	public void getCarByName_ShouldReturnCarDetails() {
 		//Arrange
-		given(carRepository.findByCarName(anyString())).willReturn(new Car("Toyota", "Bakkie", "White"));
+		given(carRepository.findByCarName(anyString())).willReturn(Arrays.asList(new Car("Toyota", "Bakkie", "White")));
 		//Query car
-		Car car = carService.getCarByCarName("Toyota");
 		
+		List<Car> cars = carService.getCarByCarName("Toyota");
+		assertEquals(!cars.isEmpty(), cars.size() > 0);
+		
+		Car car = cars.get(0);
 		//Assert
 		assertEquals(car.getCarName(), "Toyota");
 		assertEquals(car.getCarType(), "Bakkie");

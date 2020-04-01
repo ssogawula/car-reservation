@@ -1,5 +1,7 @@
 package com.sobsrental.carreservation.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,9 +33,9 @@ public class CarController {
 	}
 	
 	@GetMapping("/{carName}")
-	public Car getCarByCarName(@PathVariable String carName) {
-		
-		return carService.getCarByCarName(carName);
+	public ResponseEntity<List<Car>> getCarByCarName(@PathVariable String carName) {
+		List<Car> cars = carService.getCarByCarName(carName);
+		return new ResponseEntity<List<Car>>(cars, HttpStatus.OK);
 	}
 	
 	@PutMapping("/{id}")

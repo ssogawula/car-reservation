@@ -1,5 +1,7 @@
 package com.sobsrental.carreservation.service;
 
+import java.util.List;
+
 import com.sobsrental.carreservation.domain.Car;
 import com.sobsrental.carreservation.exception.ResourceNotFoundException;
 
@@ -21,7 +23,7 @@ public interface CarService {
 	 * @param carName
 	 * @return Car object otherwise throws {@link ResourceNotFoundException}
 	 */
-	Car	 getCarByCarName(String carName) throws ResourceNotFoundException;
+	List<Car>	 getCarByCarName(String carName) throws ResourceNotFoundException;
 	
 	/**
 	 * 
